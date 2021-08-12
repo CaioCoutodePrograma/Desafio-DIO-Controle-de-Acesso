@@ -37,12 +37,14 @@ public class NivelAcessoController {
     }
 
     @DeleteMapping(value = "/{idNivelAcesso}")
-    public ResponseEntity deleteNivelAcesso(@PathVariable long idNivelAcesso) throws Exception{
+    public ResponseEntity<NivelAcesso> deleteNivelAcesso(@PathVariable long idNivelAcesso) throws Exception{
         try {
             nivelAcessoService.deleteNivelAcesso(idNivelAcesso);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-        return (ResponseEntity<NivelAcesso>) ResponseEntity.ok();
+        NivelAcesso nivelAcesso = new NivelAcesso();
+        nivelAcesso.setId(idNivelAcesso);
+        return ResponseEntity.ok(nivelAcesso);
     }
 }

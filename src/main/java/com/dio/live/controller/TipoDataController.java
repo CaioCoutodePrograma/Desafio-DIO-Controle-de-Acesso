@@ -37,12 +37,16 @@ public class TipoDataController {
     }
 
     @DeleteMapping(value = "/{idTipoData}")
-    public ResponseEntity deleteTipoData(@PathVariable long idTipoData) throws Exception{
+    public ResponseEntity<TipoData> deleteTipoData(@PathVariable long idTipoData) throws Exception{
         try {
             tipoDataService.deleteTipoData(idTipoData);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-        return (ResponseEntity<TipoData>) ResponseEntity.ok();
+
+        TipoData tipoData = new TipoData();
+        tipoData.setId(idTipoData);
+
+        return ResponseEntity.ok(tipoData);
     }
 }

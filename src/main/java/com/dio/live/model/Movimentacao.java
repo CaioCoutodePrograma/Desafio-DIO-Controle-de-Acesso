@@ -1,10 +1,10 @@
 package com.dio.live.model;
 
-import com.dio.live.controller.idclasses.MovimentacaoId;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -16,7 +16,14 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 public class Movimentacao {
-
+        @AllArgsConstructor
+        @NoArgsConstructor
+        @EqualsAndHashCode
+        @Embeddable
+        public  class  MovimentacaoId implements Serializable {
+                private long idMovimento;
+                private long idUsuario;
+        }
         @EmbeddedId
         @Id
         private MovimentacaoId movimentacaoId;

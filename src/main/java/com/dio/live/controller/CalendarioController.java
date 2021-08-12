@@ -37,12 +37,15 @@ public class CalendarioController {
     }
 
     @DeleteMapping(value = "/{idCalendario}")
-    public ResponseEntity deleteCalendario(@PathVariable long idCalendario)throws  Exception{
+    public ResponseEntity<Calendario> deleteCalendario(@PathVariable long idCalendario)throws  Exception{
         try {
             calendarioService.deleteCalendario(idCalendario);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-            return (ResponseEntity<Calendario>) ResponseEntity.ok();
+            Calendario calendario = new Calendario();
+            calendario.setId(idCalendario);
+
+            return ResponseEntity.ok(calendario);
     }
 }

@@ -40,13 +40,16 @@ public class JornadaTrabalhoController {
     }
 
     @DeleteMapping(value = "/{idJornada}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity deleteByIDJornada(@PathVariable("idJornada") Long idJornada) throws Exception {
+    public ResponseEntity<JornadaTrabalho> deleteByIDJornada(@PathVariable("idJornada") Long idJornada) throws Exception {
        try {
            jornadaService.deleteJornada(idJornada);
        }catch (Exception e){
            System.out.println(e.getMessage());
        }
-        return (ResponseEntity<JornadaTrabalho>) ResponseEntity.ok();
+
+        JornadaTrabalho jornadaTrabalho = new JornadaTrabalho();
+        jornadaTrabalho.setId(idJornada);
+        return ResponseEntity.ok(jornadaTrabalho);
 
     }
 

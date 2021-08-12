@@ -37,12 +37,14 @@ public class OcorrenciaController {
     }
 
     @DeleteMapping(value = "/{idOcorrencia}")
-    public ResponseEntity deleteOcorrencia(@PathVariable long idOcorrencia) throws Exception{
+    public ResponseEntity<Ocorrencia> deleteOcorrencia(@PathVariable long idOcorrencia) throws Exception{
         try {
             ocorrenciaService.deleteOcorrencia(idOcorrencia);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-        return (ResponseEntity<Ocorrencia>) ResponseEntity.ok();
+        Ocorrencia ocorrencia = new Ocorrencia();
+        ocorrencia.setId(idOcorrencia);
+        return ResponseEntity.ok(ocorrencia);
     }
 }

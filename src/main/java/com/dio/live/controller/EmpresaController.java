@@ -40,13 +40,15 @@ public class EmpresaController {
 
 
     @DeleteMapping(value = "/{idEmpresa}")
-    public ResponseEntity deleteEmpresa(@PathVariable long idEmpresa)throws  Exception{
+    public ResponseEntity<Empresa> deleteEmpresa(@PathVariable long idEmpresa)throws  Exception{
         try {
             empresaService.deleteCalendario(idEmpresa);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-        return (ResponseEntity<Empresa>) ResponseEntity.ok();
+        Empresa empresa = new Empresa();
+        empresa.setId(idEmpresa);
+        return ResponseEntity.ok(empresa);
     }
 
 

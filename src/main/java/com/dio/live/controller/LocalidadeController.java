@@ -38,12 +38,15 @@ public class LocalidadeController {
     }
 
     @DeleteMapping(value = "/{idLocalidade}")
-    public ResponseEntity deleteBancoHoras(@PathVariable long idLocalidade) throws Exception{
+    public ResponseEntity<Localidade> deleteBancoHoras(@PathVariable long idLocalidade) throws Exception{
         try {
             localidadeService.deleteBancoHoras(idLocalidade);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-        return (ResponseEntity<Localidade>) ResponseEntity.ok();
+        Localidade localidade = new Localidade();
+        localidade.setId(idLocalidade);
+
+        return ResponseEntity.ok(localidade);
     }
 }

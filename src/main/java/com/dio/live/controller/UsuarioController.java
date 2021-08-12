@@ -37,12 +37,15 @@ public class UsuarioController {
     }
 
     @DeleteMapping(value = "/{idUsuario}")
-    public ResponseEntity deleteUsuario(@PathVariable long idUsuario) throws Exception{
+    public ResponseEntity<Usuario> deleteUsuario(@PathVariable long idUsuario) throws Exception{
         try {
             usuarioService.deleteUsuario(idUsuario);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-        return (ResponseEntity<Usuario>) ResponseEntity.ok();
+        Usuario usuario = new Usuario();
+        usuario.setId(idUsuario);
+
+        return ResponseEntity.ok(usuario);
     }
 }
